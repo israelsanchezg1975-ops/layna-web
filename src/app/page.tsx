@@ -255,7 +255,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-20">
-          <Container1920 className="mx-auto flex min-h-[520px] max-w-[1440px] flex-col items-center justify-center px-4 py-16 text-center">
+          <Container1920 className="mx-auto flex min-h-130 max-w-360 flex-col items-center justify-center px-4 py-16 text-center">
             <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.26em] text-slate-600">
               {current.eyebrow}
             </p>
@@ -278,7 +278,7 @@ export default function Home() {
             <div className="mt-8 flex justify-center">
               <a
                 href="#contacto"
-                className="inline-flex min-w-[190px] items-center justify-center rounded-xl bg-teal-900 px-7 py-3 text-sm font-medium text-white shadow-sm transition hover:translate-y-[1px] hover:bg-teal-800 hover:shadow-md"
+                className="inline-flex min-w-47.5 items-center justify-center rounded-xl bg-teal-900 px-7 py-3 text-sm font-medium text-white shadow-sm transition hover:translate-y-px hover:bg-teal-800 hover:shadow-md"
               >
                 Pide tu cita
               </a>
@@ -335,7 +335,7 @@ export default function Home() {
         id="servicios"
         className="border-t border-slate-200 bg-white py-16 md:py-20"
       >
-        <Container1920 className="mx-auto max-w-[1200px] px-4">
+        <Container1920 className="mx-auto max-w-300 px-4">
           <div className="mb-10 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.26em] text-teal-800">
               Nuestros servicios
@@ -391,7 +391,7 @@ export default function Home() {
         id="faq"
         className="border-t border-slate-200 bg-white py-16 md:py-20"
       >
-        <Container1920 className="mx-auto max-w-[1200px] px-4">
+        <Container1920 className="mx-auto max-w-300 px-4">
           <div className="mb-10 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.26em] text-teal-800">
               Preguntas frecuentes de nuestros clientes
@@ -446,7 +446,7 @@ export default function Home() {
         id="contacto"
         className="border-t border-slate-200 bg-slate-100 py-16 md:py-20"
       >
-        <Container1920 className="mx-auto max-w-[1040px] px-4">
+        <Container1920 className="mx-auto max-w-260 px-4">
           <div className="mb-10 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.26em] text-teal-800">
               Contacta con nosotros
@@ -461,7 +461,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mx-auto max-w-[720px] rounded-3xl bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.09)]">
+          <div className="mx-auto max-w-180 rounded-3xl bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.09)]">
             <form className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
