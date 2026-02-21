@@ -1,0 +1,24 @@
+:root {
+  /* Layout */
+  --maxw: 1920px;
+
+  /* Brand */
+  --petrol: #00565e;
+  --petrol-soft: #e6f2f3;
+
+  --gold: #c9a961;
+  --gold-soft: #e5d5a8;
+  --gold-dark: #b89850;
+
+  /* Neutrals */
+  --surface: #f8f9fa;
+  --black: #000000;
+
+  /* Lines (sin sombras) */
+  --line: rgba(0, 0, 0, 0.10);
+
+  /* Radius (sutil) */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+}
