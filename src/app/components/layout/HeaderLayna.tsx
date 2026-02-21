@@ -24,7 +24,7 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
           <button
             type="button"
             onClick={toggleMobileMenu}
-            aria-label="Abrir menú"
+            aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             className="flex flex-col justify-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1.5"
           >
             <span className="block h-px w-5 rounded-full bg-slate-800" />
@@ -111,8 +111,8 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
 
       {/* ───────────────── MOBILE MENU PANEL ───────────────── */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-emerald-900/20 bg-[#045C5C] text-white shadow-lg">
-          <div className="mx-auto max-w-6xl px-4 py-4">
+        <div className="md:hidden absolute left-0 right-0 top-full z-30 flex justify-center pt-2">
+          <div className="w-[85%] max-w-xs rounded-3xl border border-emerald-900/30 bg-[#045C5C] px-4 py-4 text-white shadow-xl">
             <div className="mb-3 flex items-center justify-between">
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em]">
                 Menú
@@ -150,11 +150,11 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
                 Terapias
               </a>
               <a
-                href="#legal"
+                href="#faq"
                 onClick={closeMobileMenu}
                 className="block rounded-xl px-3 py-2 hover:bg-white/10"
               >
-                Información legal
+                FAQs
               </a>
               <a
                 href="#contacto"

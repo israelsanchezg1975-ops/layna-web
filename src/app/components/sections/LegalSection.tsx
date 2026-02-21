@@ -23,7 +23,7 @@ export default function LegalSection({ initialTab = "aviso" }: LegalSectionProps
       id="legal"
       className="border-t border-slate-200 bg-white py-16 md:py-20"
     >
-      <Container1920 className="mx-auto max-w-[1200px] px-4">
+      <Container1920 className="mx-auto max-w-300 px-4">
         {/* Cabecera de la sección */}
         <div className="mb-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.26em] text-teal-800">

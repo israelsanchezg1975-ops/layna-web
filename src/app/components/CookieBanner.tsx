@@ -38,7 +38,7 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-end md:items-center justify-center bg-black/40 backdrop-blur-[2px]">
+    <div className="fixed inset-0 z-60 flex items-end md:items-center justify-center bg-black/40 backdrop-blur-[2px]">
       <div className="w-full max-w-lg mx-4 mb-4 md:mb-0 rounded-3xl bg-white shadow-[0_24px_70px_rgba(15,23,42,0.25)] p-6 md:p-7">
         <h2 className="text-[17px] md:text-[18px] font-semibold text-[#112033] mb-2">
           Uso de cookies
