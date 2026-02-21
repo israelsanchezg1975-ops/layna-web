@@ -24,15 +24,15 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
           <button
             type="button"
             onClick={toggleMobileMenu}
-            aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-label="Abrir menú"
             className="flex flex-col justify-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1.5"
           >
             <span className="block h-px w-5 rounded-full bg-slate-800" />
             <span className="block h-px w-4 rounded-full bg-slate-800" />
           </button>
 
-          {/* Logo centrado */}
-          <a href="#top" className="flex flex-col items-center gap-1">
+          {/* Logo centrado (móvil) */}
+          <a href="/#top" className="flex flex-col items-center gap-1">
             <Image
               src="/logo-layna.png"
               alt="Método Layna"
@@ -48,7 +48,7 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
 
           {/* Icono contacto derecha */}
           <a
-            href="#contacto"
+            href="/#contacto"
             className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm"
             aria-label="Ir al formulario de contacto"
           >
@@ -60,26 +60,26 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
         <div className="hidden w-full items-center justify-between md:flex">
           {/* Menú izquierdo */}
           <nav className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.22em] text-slate-600">
-            <a href="#metodo" className="rounded-full px-3 py-1 hover:bg-slate-100">
+            <a href="/#metodo" className="rounded-full px-3 py-1 hover:bg-slate-100">
               Método Layna
             </a>
-            <a href="#servicios" className="rounded-full px-3 py-1 hover:bg-slate-100">
+            <a href="/#servicios" className="rounded-full px-3 py-1 hover:bg-slate-100">
               Servicios
             </a>
-            <a href="#biocomlux" className="rounded-full px-3 py-1 hover:bg-slate-100">
+            <a href="/#biocomlux" className="rounded-full px-3 py-1 hover:bg-slate-100">
               Terapias
             </a>
           </nav>
 
-          {/* Logo centrado */}
+          {/* Logo centrado (desktop, un poco más grande que antes) */}
           <div className="flex flex-1 items-center justify-center">
-            <a href="#top" className="flex flex-col items-center gap-1">
+            <a href="/#top" className="flex flex-col items-center gap-1">
               <Image
                 src="/logo-layna.png"
                 alt="Método Layna"
-                width={200}
-                height={64}
-                className="h-auto w-auto"
+                width={220}
+                height={70}
+                className="h-16 w-auto"
                 priority
               />
               <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-slate-500">
@@ -99,10 +99,10 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
               <MessageCircle className="h-3.5 w-3.5" />
               <span>Pedir cita</span>
             </a>
-            <a href="#contacto" className="rounded-full px-3 py-1 hover:bg-slate-100">
+            <a href="/#contacto" className="rounded-full px-3 py-1 hover:bg-slate-100">
               Contactar
             </a>
-            <a href="#faq" className="rounded-full px-3 py-1 hover:bg-slate-100">
+            <a href="/#faq" className="rounded-full px-3 py-1 hover:bg-slate-100">
               FAQs
             </a>
           </nav>
@@ -111,8 +111,8 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
 
       {/* ───────────────── MOBILE MENU PANEL ───────────────── */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute left-0 right-0 top-full z-30 flex justify-center pt-2">
-          <div className="w-[85%] max-w-xs rounded-3xl border border-emerald-900/30 bg-[#045C5C] px-4 py-4 text-white shadow-xl">
+        <div className="md:hidden border-t border-emerald-900/20 bg-[#045C5C] text-white shadow-lg">
+          <div className="mx-auto max-w-6xl px-4 py-4">
             <div className="mb-3 flex items-center justify-between">
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em]">
                 Menú
@@ -129,35 +129,35 @@ export default function HeaderLayna({ whatsappHref }: HeaderLaynaProps) {
 
             <nav className="space-y-2 text-sm">
               <a
-                href="#metodo"
+                href="/#metodo"
                 onClick={closeMobileMenu}
                 className="block rounded-xl px-3 py-2 hover:bg-white/10"
               >
                 Método Layna
               </a>
               <a
-                href="#servicios"
+                href="/#servicios"
                 onClick={closeMobileMenu}
                 className="block rounded-xl px-3 py-2 hover:bg-white/10"
               >
                 Servicios
               </a>
               <a
-                href="#biocomlux"
+                href="/#biocomlux"
                 onClick={closeMobileMenu}
                 className="block rounded-xl px-3 py-2 hover:bg-white/10"
               >
                 Terapias
               </a>
               <a
-                href="#faq"
+                href="/aviso-legal#legal"
                 onClick={closeMobileMenu}
                 className="block rounded-xl px-3 py-2 hover:bg-white/10"
               >
-                FAQs
+                Información legal
               </a>
               <a
-                href="#contacto"
+                href="/#contacto"
                 onClick={closeMobileMenu}
                 className="block rounded-xl px-3 py-2 hover:bg-white/10"
               >
