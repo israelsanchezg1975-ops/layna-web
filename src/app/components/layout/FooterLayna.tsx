@@ -29,22 +29,22 @@ export default function FooterLayna() {
               </p>
               <ul className="mt-3 space-y-2 text-[13px]">
                 <li>
-                  <a href="#metodo" className="hover:text-white">
+                  <a href="/#metodo" className="hover:text-white">
                     Método
                   </a>
                 </li>
                 <li>
-                  <a href="#servicios" className="hover:text-white">
+                  <a href="/#servicios" className="hover:text-white">
                     Servicios
                   </a>
                 </li>
                 <li>
-                  <a href="#biocomlux" className="hover:text-white">
+                  <a href="/#biocomlux" className="hover:text-white">
                     Terapias
                   </a>
                 </li>
                 <li>
-                  <a href="#faq" className="hover:text-white">
+                  <a href="/#faq" className="hover:text-white">
                     Preguntas frecuentes
                   </a>
                 </li>
@@ -58,17 +58,17 @@ export default function FooterLayna() {
               </p>
               <ul className="mt-3 space-y-2 text-[13px]">
                 <li>
-                  <a href="#legal" className="hover:text-white">
+                  <a href="/aviso-legal" className="hover:text-white">
                     Aviso legal
                   </a>
                 </li>
                 <li>
-                  <a href="#legal" className="hover:text-white">
+                  <a href="/privacidad" className="hover:text-white">
                     Política de privacidad
                   </a>
                 </li>
                 <li>
-                  <a href="#legal" className="hover:text-white">
+                  <a href="/cookies" className="hover:text-white">
                     Política de cookies
                   </a>
                 </li>
@@ -102,7 +102,7 @@ export default function FooterLayna() {
                   </a>
                 </li>
                 <li>
-                  <a href="#contacto" className="hover:text-white">
+                  <a href="/#contacto" className="hover:text-white">
                     Contactar
                   </a>
                 </li>
