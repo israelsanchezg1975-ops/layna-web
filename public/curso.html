@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Curso Método LAYNA · Fundamentos</title>
+
+    <!-- Google Fonts: Bodoni Moda + Manrope -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --color-primario: #00565e;
+        --color-texto: #111827;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Área de impresión exacta: 180mm x 250mm */
+      @page {
+        size: A4;
+        margin: 23.5mm 15mm; /* 297 - 250 = 47 -> 23.5 arriba/abajo; 210 - 180 = 30 -> 15 izq/der */
+      }
+
+      body {
+        background: #ffffff;
+        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: var(--color-texto);
+      }
+
+      /* Cada bloque .page es una página lógica */
+      .page {
+        width: 100%;
+        max-width: 180mm; /* columna de contenido */
+        margin: 0 auto 12mm; /* separación entre páginas en pantalla */
+        padding: 0;
+        background: #ffffff;
+      }
+
+      .page + .page {
+        page-break-before: always; /* forzar salto antes de cada página lógica */
+      }
+
+      /* Estilo “Apple-like” en pantalla */
+      @media screen {
+        body {
+          background: #e5e7eb;
+        }
+
+        .page {
+          padding: 18mm 0 14mm;
+          box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+          border-radius: 12px;
+        }
+      }
+
+      /* Limpio para imprimir: sin sombras ni bordes, fondo blanco */
+      @media print {
+        body {
+          background: #ffffff;
+        }
+
+        .page {
+          margin: 0 auto;
+          max-width: 100%;
+          padding: 0;
+          box-shadow: none;
+          border-radius: 0;
+        }
+
+        .synthesis-box,
+        .gallery-item {
+          page-break-inside: avoid;
+        }
+
+        h2,
+        h3,
+        h4 {
+          page-break-after: avoid;
+        }
+      }
+
+      .header-small {
+        font-size: 9pt;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #7a8b90;
+        margin-bottom: 6mm;
+      }
+
+      .logo {
+        max-width: 90mm;
+        height: auto;
+        margin: 8mm auto 12mm auto; /* centrado */
+        display: block;
+      }
+
+      .title-main {
+        font-family: "Bodoni Moda", "Times New Roman", serif;
+        font-size: 26pt;
+        line-height: 1.2;
+        color: var(--color-primario);
+        margin: 0 0 6mm;
+      }
+
+      .subtitle-main {
+        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 12pt;
+        margin: 0 0 18mm;
+        color: #4b5b60;
+      }
+
+      .footer-brand {
+        margin-top: 18mm;
+        font-size: 9pt;
+        color: #7a8b90;
+      }
+
+      .footer-brand span {
+        font-weight: 600;
+        color: var(--color-primario);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Bodoni Moda", "Times New Roman", serif;
+        color: var(--color-primario);
+        margin-top: 10mm;
+        margin-bottom: 3mm;
+      }
+
+      h1 {
+        font-size: 20pt;
+      }
+
+      h2 {
+        font-size: 16pt;
+      }
+
+      h3 {
+        font-size: 13pt;
+      }
+
+      h4 {
+        font-size: 11pt;
+      }
+
+      p {
+        font-size: 11pt;
+        line-height: 1.6;
+        margin: 0 0 4mm;
+      }
+
+      .section-subtitle {
+        font-size: 11pt;
+        color: #4b5b60;
+        margin: 0 0 10mm;
+      }
+
+      .index-list {
+        margin-top: 6mm;
+        margin-left: 2mm;
+      }
+
+      .index-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11pt;
+        margin-bottom: 3mm;
+      }
+
+      .index-item span:first-child {
+        color: var(--color-texto);
+      }
+
+      .index-item span:last-child {
+        color: #7a8b90;
+      }
+
+      .index-sub {
+        padding-left: 6mm;
+        font-size: 10pt;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .module-label {
+        font-size: 9pt;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: #7a8b90;
+        margin-top: 4mm;
+        margin-bottom: 2mm;
+      }
+
+      .synthesis-box {
+        margin-top: 10mm;
+        padding: 8mm;
+        border-radius: 4mm;
+        border: 1px solid #d4c8bc;
+        background: #f9f5f0;
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1.8;
+        font-weight: 500;
+      }
+
+      .synthesis-box strong {
+        font-family: "Bodoni Moda", "Times New Roman", serif;
+        font-size: 12pt;
+        color: var(--color-primario);
+      }
+
+      .synthesis-box p {
+        margin-bottom: 2mm;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6mm;
+        margin-top: 6mm;
+      }
+
+      .gallery-item {
+        background: #ffffff;
+        border-radius: 3mm;
+        padding: 3mm;
+        border: 1px solid #e0dad2;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 2mm;
+      }
+
+      .gallery-caption {
+        font-size: 9pt;
+        margin-top: 2mm;
+        color: #4b5b60;
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      .mt-large {
+        margin-top: 16mm;
+      }
+
+      .mt-medium {
+        margin-top: 8mm;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- PORTADA -->
+    <div class="page">
+      <div class="header-small">MÉTODO LAYNA</div>
+
+      <img src="/logo-layna.png" alt="Logo LAYNA" class="logo" />
+
+      <h1 class="title-main">Fundamentos del Método LAYNA</h1>
+      <p class="subtitle-main">
+        Curso introductorio sobre la comprensión del ser humano como sistema
+        energético e informacional y las herramientas terapéuticas del Método
+        LAYNA.
+      </p>
+
+      <p>
+        Este documento está diseñado para acompañar a la persona a comprender la
+        base conceptual y práctica del Método LAYNA, integrando tanto la
+        experiencia humana directa como aportes de la medicina frecuencial, la
+        biofísica cuántica y la neurociencia actual.
+      </p>
+
+      <div class="footer-brand">
+        <span>Método LAYNA</span> · Medicina frecuencial integrativa y
+        acompañamiento consciente.
+      </div>
+    </div>
+
+    <!-- ÍNDICE -->
+    <div class="page">
+      <div class="header-small">Contenido del curso</div>
+
+      <h2>Índice general</h2>
+      <p class="section-subtitle">
+        Los módulos están pensados para seguir una secuencia lógica: primero los
+        fundamentos, después la comprensión del ser humano como sistema
+        energético e informacional y, por último, las herramientas concretas
+        utilizadas en el Método LAYNA.
+      </p>
+
+      <div class="index-list">
+        <a href="#modulo1">
+          <div class="index-item">
+            <span>Módulo 1. Fundamentos del Método LAYNA</span>
+            <span>Pág. 3</span>
+          </div>
+        </a>
+        <div class="index-item index-sub">
+          <span>1.1. Definición del Método LAYNA</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>1.2. Origen del Método LAYNA</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>1.3. Principio central del método</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>1.4. Pilares conceptuales del Método LAYNA</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>1.5. Diferenciación del Método LAYNA</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>1.6. Rol del terapeuta</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>1.7. Rol del paciente o consultante</span>
+        </div>
+
+        <a href="#modulo2">
+          <div class="index-item mt-large">
+            <span
+              >Módulo 2. El ser humano como sistema energético e
+              informacional</span
+            >
+            <span>Pág. 5</span>
+          </div>
+        </a>
+        <div class="index-item index-sub">
+          <span
+            >2.1. Comprender al ser humano desde una mirada energética e
+            informacional</span
+          >
+        </div>
+        <div class="index-item index-sub">
+          <span>2.2. El organismo como una red de coherencia</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>2.3. El ser humano y el campo de interacción</span>
+        </div>
+        <div class="index-item index-sub">
+          <span
+            >2.4. Aportes desde la medicina vibracional y la coherencia
+            fisiológica</span
+          >
+        </div>
+        <div class="index-item index-sub">
+          <span>2.5. Factores que pueden alterar la coherencia del sistema</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>2.6. Principios de la biofísica cuántica</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>2.7. Frecuencia y resonancia como lenguaje biológico</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>2.8. La luz y los biofotones</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>2.9. Integración en la mirada del Método LAYNA</span>
+        </div>
+
+        <a href="#modulo3">
+          <div class="index-item mt-large">
+            <span>Módulo 3. Herramientas terapéuticas del Método LAYNA</span>
+            <span>Pág. 7</span>
+          </div>
+        </a>
+        <div class="index-item index-sub">
+          <span>3.1. Evaluación funcional del estado energético</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>3.2. Herramientas terapéuticas del Método LAYNA</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>3.3. Intervenciones sin aparatología</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>3.4. Intervenciones apoyadas en tecnología frecuencial</span>
+        </div>
+        <div class="index-item index-sub">
+          <span>Síntesis final del módulo</span>
+        </div>
+
+        <a href="#galeria">
+          <div class="index-item mt-large">
+            <span>Anexo visual · Galería de imágenes</span>
+            <span>Pág. 10</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1 -->
+    <div class="page" id="modulo1">
+      <div class="module-label">Módulo 1</div>
+      <h2>Fundamentos del Método LAYNA</h2>
+
+      <h3>1.1. Definición del Método LAYNA</h3>
+      <p>
+        El Método LAYNA es un enfoque terapéutico integrativo basado en
+        principios de la medicina frecuencial y en la comprensión del ser humano
+        como un sistema energético, electromagnético e informacional altamente
+        organizado.
+      </p>
+      <p>
+        Su objetivo principal es ayudar al organismo a recuperar su coherencia
+        interna y su capacidad natural de autorregulación, acompañando al
+        sistema hacia estados de mayor equilibrio funcional.
+      </p>
+      <p>
+        Este abordaje se apoya en la premisa de que los procesos biológicos no
+        dependen únicamente de la bioquímica, sino también de la correcta
+        organización y transmisión de la información energética dentro del
+        organismo.
+      </p>
+      <p>
+        El propósito final del Método LAYNA es acompañar a la persona para que
+        pueda recuperar su soberanía, facilitando que el sistema vuelva
+        progresivamente a estados de mayor coherencia y autorregulación.
+      </p>
+
+      <h3>1.2. Origen del Método LAYNA</h3>
+      <p>
+        El origen del Método LAYNA se encuentra en la experiencia vital profunda
+        de su creadora, quien atravesó durante más de seis años un proceso
+        personal marcado por:
+      </p>
+      <p>
+        • La pérdida de la salud<br />
+        • La vivencia de duelos significativos<br />
+        • Sensación de derrumbe de la seguridad vital y económica.
+      </p>
+      <p>
+        Durante este camino, la creadora del método, al no encontrar salida ni
+        respuestas en la medicina tradicional ni en ningún método anterior
+        válido para ella, inició una búsqueda exhaustiva del conocimiento humano
+        y de sí misma para comprender lo que le estaba sucediendo y poder iniciar
+        su proceso de recuperación.
+      </p>
+      <p>
+        Se introdujo de lleno durante más de dos años en prácticas de meditación
+        profunda y visualización, dedicando más de siete horas al día a dichas
+        técnicas, así como procesos de conexión consciente con la naturaleza, el
+        sol y la tierra. (Explicación breve de su proceso)
+      </p>
+      <p>Paralelamente, inició lecturas y estudios sobre:</p>
+      <p>
+        • Epigenética.<br />
+        • Neuroplasticidad.<br />
+        • Medicina frecuencial.<br />
+        • Espiritualidad.<br />
+        y diferentes terapias enfocadas todas ellas a recuperar la coherencia
+        original.
+      </p>
+
+      <div class="synthesis-box">
+        <p><strong>ESENCIA DEL ORIGEN</strong></p>
+        <p>
+          El Método LAYNA nace principalmente de la experiencia humana directa,
+          la observación clínica personal y la aplicación práctica sostenida en
+          el tiempo.
+        </p>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1 (continuación) -->
+    <div class="page">
+      <h3>1.3. Principio central del método</h3>
+      <p>
+        El Método LAYNA se basa en una premisa fundamental: Cuando el sistema
+        recupera su coherencia interna, el organismo tiende de forma natural
+        hacia la regulación.
+      </p>
+      <p>Desde esta mirada:</p>
+      <p>
+        • El cuerpo se reorganiza.<br />
+        • La mente se calma.<br />
+        • Los procesos vitales tienden a ordenarse, volviendo a la homeostasis.
+      </p>
+      <p>
+        No se trata únicamente de un impacto sobre la salud física, sino de un
+        proceso de reorganización global del sistema humano.
+      </p>
+      <p>
+        Cuando la coherencia interna se restablece de forma progresiva y
+        sostenida, muchas personas refieren cambios que trascienden el plano
+        físico, observándose con frecuencia:
+      </p>
+      <p>
+        • Mayor claridad mental.<br />
+        • Mejor regulación emocional.<br />
+        • Incremento de la capacidad adaptativa frente al estrés.<br />
+        • Mejora en la calidad del descanso.<br />
+        • Una mayor sensación de estabilidad interna.<br />
+        • Sensación de expansión y libertad.
+      </p>
+      <p>
+        Desde la perspectiva del Método LAYNA, esto puede entenderse como la
+        consecuencia de un sistema que comienza a funcionar con mayor sincronía
+        interna.
+      </p>
+      <p>
+        Al recordar su biología original, es habitual que la persona perciba
+        también ajustes positivos en distintas áreas de su vida cotidiana,
+        incluyendo:
+      </p>
+      <p>
+        • La forma de relacionarse consigo misma.<br />
+        • La calidad de sus relaciones interpersonales.<br />
+        • Nivel de energía disponible para el día a día.<br />
+        • Capacidad para tomar decisiones con mayor claridad.
+      </p>
+      <p>
+        De este modo, el proceso de recuperación de la coherencia no se limita
+        al ámbito de la salud, sino que puede reflejarse en una mayor sensación
+        de alineación y orden en múltiples dimensiones de la vida.
+      </p>
+
+      <h3>1.4. Pilares conceptuales del Método LAYNA</h3>
+      <p>
+        El desarrollo del Método LAYNA se apoya en la integración de distintos
+        campos de estudio relacionados con la comprensión profunda del ser
+        humano.
+      </p>
+      <p>
+        El método recoge e integra aportaciones de múltiples profesionales,
+        investigadores y divulgadores, entre ellos:
+      </p>
+      <p>
+        • Dra. Laura Gámez, doctora y divulgadora, creadora de la medicina
+        frecuencial aplicada y especialista en biofísica cuántica.<br />
+        • Joe Dispenza, autor y divulgador en el campo de la relación
+        mente-cuerpo y los procesos de cambio neurofisiológico.<br />
+        • Bruce Lipton, biólogo celular y divulgador destacado en el campo de la
+        epigenética.<br />
+        • Gregg Braden, investigador y divulgador sobre la conexión entre
+        coherencia fisiológica y estados emocionales.<br />
+        • Lynne McTaggart, periodista e investigadora, reconocida por sus
+        trabajos sobre el campo de información y autora de la obra de referencia
+        El Campo.<br />
+        • Eckhart Tolle, escritor y divulgador reconocido por su trabajo sobre
+        la presencia consciente y el impacto del momento presente en la
+        regulación del estado interno.<br />
+        • Pablo d’Ors, escritor y sacerdote, referente contemporáneo en la
+        práctica del silencio y la meditación contemplativa, destacando el
+        silencio como vía de regulación profunda y autoconocimiento.<br />
+        • Annie Hopper, reconocida por sus programas de reentrenamiento neuronal
+        orientados a la rehabilitación del sistema límbico.<br />
+        • Sara Romero, desarrolladora de su método de reprogramación del
+        subconsciente orientado a la identificación y transformación de
+        programas limitantes.
+      </p>
+      <p>
+        Existen muchos más escritores, divulgadores y físicos que podrían
+        nombrarse, pero se han seleccionado aquellos en los que se ha
+        profundizado más tanto en estudio como en práctica.
+      </p>
+    </div>
+
+    <!-- MÓDULO 1 (continuación) -->
+    <div class="page">
+      <h3>1.5. Diferenciación del Método LAYNA</h3>
+      <p>
+        El elemento distintivo del Método LAYNA frente a otros enfoques es su
+        marco de comprensión del ser humano.
+      </p>
+      <p>
+        Mientras que muchos modelos terapéuticos se centran principalmente en:
+      </p>
+      <p>
+        • La bioquímica.<br />
+        • La estructura anatómica.<br />
+        • El síntoma aislado.<br />
+        • Incluso en el trauma o emoción atrapada.
+      </p>
+      <p>
+        En el Método LAYNA nunca se trabaja directamente sobre el trauma en el
+        caso de que lo hubiera.
+      </p>
+      <p>
+        El Método LAYNA sitúa en el centro la comprensión del ser humano como un
+        sistema:
+      </p>
+      <p>
+        • Energético.<br />
+        • Vibracional.<br />
+        • Resonante.<br />
+        • Informacional.
+      </p>
+      <p>
+        Desde esta perspectiva, el trabajo terapéutico se orienta a facilitar
+        condiciones de coherencia global del sistema, en lugar de centrarse
+        exclusivamente en la supresión sintomática.
+      </p>
+
+      <h3>1.6. Rol del terapeuta en el Método LAYNA</h3>
+      <p>
+        Dentro de este modelo, el terapeuta no actúa como agente que corrige al
+        organismo, sino como acompañante del proceso de regulación.
+      </p>
+      <p>
+        Su función principal es acompañar al paciente mediante diferentes
+        métodos y técnicas a recuperar su estado de coherencia original. Es
+        importante respetar los tiempos de cada uno —no hay dos seres iguales—
+        y, sobre todo, ver al paciente como un ser completo y fundamentalmente
+        energético.
+      </p>
+      <p>
+        En el Método LAYNA no se impone ni se añade nada; se facilitan las
+        condiciones para que el sistema se autorregule recordando quién es y
+        confiando plenamente en la biología divina que habita en cada uno de
+        nosotros.
+      </p>
+
+      <h3>1.7. Rol del paciente o consultante</h3>
+      <p>
+        El papel de la persona que recibe el acompañamiento es igualmente
+        activo. Desde la mirada LAYNA:
+      </p>
+      <p>
+        • No se introduce nada nuevo en el sistema<br />
+        • No se añade una capacidad inexistente.<br />
+        • Se facilita el recuerdo funcional del estado de coherencia.
+      </p>
+      <p>Por ello, el proceso implica:</p>
+      <p>
+        • Participación consciente.<br />
+        • Apertura al proceso, y compromiso con los cambios necesarios.
+      </p>
+      <p>
+        Es fundamental que el paciente o la persona a la que acompañemos quiera
+        realizar este cambio en su vida de forma voluntaria y consciente. Al
+        final es su propia evolución y conocimiento de sí mismo. A diferencia
+        del sistema médico convencional, aquí sí hay participación activa del
+        paciente.
+      </p>
+
+      <div class="synthesis-box mt-medium">
+        <p><strong>Fundamentos LAYNA</strong></p>
+        <p>El Método LAYNA no añade nada al ser humano.</p>
+        <p>
+          Le acompaña a recordar el orden, la coherencia y la inteligencia
+          profunda que siempre han habitado en él.
+        </p>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2 -->
+    <div class="page" id="modulo2">
+      <div class="module-label">Módulo 2</div>
+      <h2>El ser humano como sistema energético e informacional</h2>
+
+      <h3>
+        2.1. Comprender al ser humano desde una mirada energética e
+        informacional
+      </h3>
+      <p>
+        El Método LAYNA parte de una comprensión ampliada del ser humano como un
+        sistema:
+      </p>
+      <p>
+        • energético<br />
+        • vibracional<br />
+        • resonante<br />
+        • informacional<br />
+        • y fotónico
+      </p>
+      <p>
+        Desde esta perspectiva, el organismo no se contempla únicamente como una
+        estructura bioquímica, sino como un sistema dinámico en constante
+        intercambio de energía e información.
+      </p>
+      <p>
+        La física moderna ha mostrado que la materia no es un elemento sólido e
+        inerte, sino energía organizada y condensada en distintos niveles de
+        densidad. Esta comprensión permite ampliar la mirada sobre el
+        funcionamiento del cuerpo humano e integrar dimensiones que
+        tradicionalmente se han estudiado por separado.
+      </p>
+      <p>
+        Cuando entendemos que la materia es energía organizada y condensada,
+        resulta más fácil comprender que antes de que aparezca un síntoma físico
+        puede haberse producido previamente un desajuste energético y
+        vibracional en la coherencia del sistema que poseemos.
+      </p>
+      <p>
+        Desde la mirada del Método LAYNA, la pérdida de orden vibracional y de
+        comunicación interna puede preceder a la manifestación de la disfunción
+        observable, el síntoma o la enfermedad.
+      </p>
+
+      <h3>2.2. El organismo como una red de coherencia</h3>
+      <p>
+        En condiciones de equilibrio, los distintos órganos y sistemas del
+        cuerpo funcionan de manera altamente coordinada y coherente.
+      </p>
+      <p>
+        Cada tejido y cada sistema biológico mantiene patrones rítmicos propios
+        y una comunicación constante con el resto del organismo. Esta
+        coordinación permite que el cuerpo funcione como una unidad integrada y
+        adaptativa.
+      </p>
+      <p>
+        Una forma sencilla de comprenderlo es imaginar el organismo como una
+        orquesta perfectamente afinada.
+      </p>
+      <p>
+        Cuando todos los instrumentos están en coherencia:<br />
+        • la música fluye con armonía<br />
+        • el ritmo se mantiene estable<br />
+        • y el conjunto funciona con precisión.
+      </p>
+      <p>
+        Sin embargo, cuando uno o varios instrumentos se desajustan, la armonía
+        global comienza a alterarse. Del mismo modo, cuando el sistema humano
+        pierde parte de su coherencia interna, pueden comenzar a aparecer
+        señales de desregulación que, con el tiempo, podrían manifestarse en
+        forma de síntomas físicos o emocionales.
+      </p>
+    </div>
+
+    <!-- MÓDULO 2 (continuación) -->
+    <div class="page">
+      <h3>2.3. El ser humano y el campo de interacción</h3>
+      <p>
+        El Método LAYNA contempla al ser humano no como un sistema aislado, sino
+        como parte de un campo de interacción más amplio, dinámico y en
+        constante intercambio de información.
+      </p>
+      <p>
+        Diversos modelos procedentes de la física moderna hablan de que vivimos
+        inmersos en un campo energético con el cual interactuamos. Desde nuestra
+        mirada, hemos entendido que no solo interactuamos con ese campo
+        energético, sino que somos el campo.
+      </p>
+      <p>
+        Cuando la persona pierde coherencia interna, la comunicación dentro de
+        este sistema amplio se vuelve menos eficiente. Por el contrario, cuando
+        el organismo entra en estados de mayor regulación y orden —por ejemplo
+        mediante prácticas de meditación, respiración consciente, regulación
+        emocional u otras herramientas terapéuticas—, el sistema tiende a
+        resonar con patrones de mayor coherencia.
+      </p>
+      <p>
+        Este proceso puede vivirse subjetivamente como un recordar el estado del
+        equilibrio original del que vinimos o del que formamos parte. Por ello,
+        el Método LAYNA utiliza distintas técnicas orientadas a facilitar la
+        recuperación de la coherencia interna, acompañando al organismo para que
+        pueda volver progresivamente a estados de mayor orden, estabilidad y
+        adaptación.
+      </p>
+
+      <h3>2.4. Aportes desde la medicina vibracional y la coherencia fisiológica</h3>
+      <p>
+        Autores dentro del campo de la medicina vibracional propusieron que el
+        organismo humano puede entenderse como un sistema multidimensional en el
+        que los procesos físicos están interrelacionados con dinámicas
+        energéticas y de información. Entienden al ser humano como un sistema
+        físico, energético, emocional, mental y espiritual.
+      </p>
+      <p>
+        Desde esta visión, el equilibrio del sistema no depende únicamente de
+        procesos bioquímicos, sino también de la organización coherente de los
+        distintos niveles del organismo.
+      </p>
+      <p>
+        Por su parte, divulgadores como Gregg Braden, Joe Dispenza, entre otros,
+        han puesto el foco en la importancia de la coherencia
+        pensamiento-emoción como elemento modulador de la respuesta del
+        organismo frente al entorno.
+      </p>
+      <p>
+        Parte de este entendimiento señala que, para que se produzca un cambio
+        visible, no es suficiente con el pensamiento: es necesario sentir la
+        emoción de que dicho estado ya se ha conseguido. La emoción actúa como
+        señal biológica clave en la consolidación de nuevos estados funcionales
+        del sistema.
+      </p>
+      <p>
+        En el marco del Método LAYNA, estas observaciones se interpretan como
+        indicativas de que el organismo responde de forma más eficiente cuando
+        recupera estados internos de orden y sincronía.
+      </p>
+
+      <h3>2.5. Factores que pueden alterar la coherencia del sistema</h3>
+      <p>
+        Existen diversos factores que pueden influir en el equilibrio de dicha
+        coherencia:
+      </p>
+      <p>
+        <strong>Factores externos</strong><br /><br />
+        Entre ellos pueden encontrarse, por ejemplo:
+      </p>
+      <p>
+        • Exposición prolongada a radiaciones ambientales<br />
+        • Sobrecarga tóxica del entorno<br />
+        • Estrés físico mantenido<br />
+        • Alteraciones del descanso y de los ritmos biológicos
+      </p>
+      <p>
+        Estos factores pueden aumentar la carga adaptativa del organismo y
+        dificultar el mantenimiento de la coherencia interna.
+      </p>
+      <p><strong>Factores internos</strong></p>
+      <p>
+        También existen factores internos que influyen de forma significativa en
+        la regulación del sistema, como:
+      </p>
+      <p>
+        • Patrones de pensamiento repetitivos<br />
+        • Creencias limitantes profundamente arraigadas<br />
+        • Estados emocionales sostenidos en el tiempo<br />
+        • La forma en que la persona interpreta y vive sus experiencias.
+      </p>
+      <p>
+        Desde la perspectiva integrativa, estos elementos pueden modular la
+        respuesta del sistema nervioso y la capacidad adaptativa del organismo.
+      </p>
+    </div>
+
+    <!-- MÓDULO 2 (continuación) -->
+    <div class="page">
+      <h3>2.6. Principios de la biofísica cuántica</h3>
+      <p>
+        La biofísica cuántica explora cómo los principios de la física moderna
+        han ampliado la comprensión clásica de la materia y los sistemas vivos.
+        Dentro de este marco teórico suelen mencionarse algunos principios
+        fundamentales de la física cuántica, entre ellos:
+      </p>
+      <p>
+        <strong>La dualidad onda-partícula (Louis de Broglie, 1924).</strong
+        ><br />
+        La materia puede comportarse tanto como partícula como onda, mostrando
+        que su naturaleza es dinámica y no puramente sólida.
+      </p>
+      <p>Experimento principal: la doble rendija.</p>
+      <p>
+        <strong>El principio de incertidumbre (Werner Heisenberg, 1927).</strong
+        ><br />
+        A nivel subatómico no es posible conocer simultáneamente con precisión
+        absoluta ciertas propiedades de una partícula, como su posición y su
+        velocidad.
+      </p>
+      <p>
+        <strong
+          >El principio de superposición cuántica (Erwin Schrödinger,
+          1935).</strong
+        ><br />
+        Un sistema cuántico puede encontrarse en varios estados posibles al
+        mismo tiempo hasta que se produce una medición o interacción.
+      </p>
+      <p>(Experimento mental del gato de Schrödinger).</p>
+      <p>
+        <strong
+          >El principio de no localidad o entrelazamiento cuántico (Alain
+          Aspect, 1982 — verificación experimental).</strong
+        ><br />
+        Partículas que han interactuado pueden mantener correlaciones
+        instantáneas a distancia, mostrando la profunda interconexión de los
+        sistemas cuánticos.
+      </p>
+      <p>
+        Simplemente los mencionamos sin entrar en detalle para entender que la
+        biofísica cuántica tiene sus fundamentos en la física cuántica y la
+        medicina frecuencial en la biofísica cuántica. Estos principios han
+        contribuido a ampliar la comprensión de los sistemas biológicos complejos
+        y han abierto nuevas líneas de investigación sobre terapias energéticas
+        que anteriormente carecían de un marco teórico suficiente.
+      </p>
+
+      <h3>2.7. Frecuencia y resonancia como lenguaje biológico</h3>
+      <p>
+        Habiendo comprendido que el ser humano puede entenderse como un sistema
+        energético y vibracional, resulta importante profundizar en cómo se
+        expresa esta vibración, cómo se mide a través de la frecuencia y cómo
+        interactúa mediante el fenómeno de la resonancia.
+      </p>
+      <p><strong>¿Qué es la frecuencia?</strong></p>
+      <p>
+        En términos físicos, la frecuencia es el número de repeticiones de un
+        fenómeno vibratorio por unidad de tiempo. En el organismo humano, muchos
+        procesos funcionan de forma rítmica —como el latido cardíaco, las ondas
+        cerebrales o la actividad eléctrica celular—, por lo que puede
+        entenderse como un sistema compuesto por múltiples frecuencias
+        coordinadas.
+      </p>
+      <p>
+        Cada órgano y cada sistema del cuerpo mantiene patrones rítmicos propios
+        y oscila dentro de determinados rangos de frecuencia funcional. Por lo
+        tanto, cuando decimos que somos seres vibracionales, hacemos referencia
+        a que nuestros procesos biológicos y eléctricos se expresan a través de
+        patrones rítmicos y frecuenciales.
+      </p>
+    </div>
+
+    <!-- MÓDULO 2 (continuación) -->
+    <div class="page">
+      <p><strong>¿Qué es la resonancia?</strong></p>
+      <p>
+        La resonancia es el fenómeno por el cual un sistema responde con mayor
+        intensidad cuando recibe un estímulo en una frecuencia compatible con la
+        suya. Es decir, un sistema entra en resonancia cuando reconoce una señal
+        afín a su propio patrón vibratorio.
+      </p>
+      <p>
+        Desde la práctica terapéutica del Método LAYNA, cuando un tejido u órgano
+        ha perdido parte de su coherencia funcional, la exposición a estímulos
+        frecuenciales compatibles puede favorecer que el sistema tienda a
+        reorganizarse hacia patrones más ordenados.
+      </p>
+      <p>
+        Por ejemplo, en el trabajo con el oscilador de ondas múltiples, cuando un
+        órgano ha visto alterado su ritmo funcional, la entrega de determinadas
+        señales frecuenciales puede facilitar que el sistema entre en resonancia
+        y tienda a recuperar progresivamente su patrón de funcionamiento más
+        eficiente.
+      </p>
+      <p><strong>Resonancia y coherencia en el Método LAYNA</strong></p>
+      <p>
+        Desde la mirada LAYNA, la resonancia actúa como un mecanismo facilitador
+        de reorganización del sistema.
+      </p>
+      <p>
+        Cuando el organismo entra en estados de regulación profunda —por ejemplo
+        mediante meditación, respiración consciente u otras herramientas
+        frecuenciales— puede volverse más receptivo a patrones de funcionamiento
+        más ordenados.
+      </p>
+      <p>
+        Dicho de forma sencilla, al entrar en resonancia con estímulos
+        compatibles con su naturaleza, el organismo puede recordar y recuperar
+        progresivamente su estado de coherencia original.
+      </p>
+
+      <h3>2.8. La luz y los biofotones</h3>
+      <p>
+        Diversas investigaciones en biofísica han observado que las células
+        vivas emiten fotones de muy baja intensidad, también llamados biofotones.
+        Estas emisiones luminosas se han estudiado como posibles indicadores de
+        actividad metabólica y de estado funcional celular.
+      </p>
+      <p>
+        En este campo destacó el trabajo de Fritz-Albert Popp, biofísico alemán
+        considerado pionero en la investigación de la luz celular. Sus estudios
+        propusieron que las células vivas emiten luz ultradébil (biofotones) y
+        que el patrón de esta emisión puede reflejar el estado funcional del
+        sistema biológico.
+      </p>
+      <p>Según sus investigaciones:</p>
+      <p>
+        • Las células vivas emiten luz ultradébil medible.<br />
+        • Esta emisión puede mostrar mayor coherencia en sistemas biológicos en
+        equilibrio.<br />
+        • La comunicación celular no sería exclusivamente química, sino también
+        electromagnética y lumínica.<br />
+        • La coherencia biológica tendería a reflejarse en la coherencia de la
+        emisión de luz.
+      </p>
+      <p>
+        Desde esta mirada, la luz puede entenderse como una capa adicional de
+        comunicación dentro del organismo. Cuando las células funcionan de forma
+        óptima, la emisión lumínica tiende a mostrar mayor orden; cuando existe
+        desregulación, estos patrones pueden volverse más caóticos.
+      </p>
+      <p>
+        En el contexto del Método LAYNA, estas observaciones se interpretan como
+        indicativas de que la vida puede entenderse como un fenómeno altamente
+        organizado de luz e información.
+      </p>
+
+      <h3>2.9. Integración en la mirada del Método LAYNA</h3>
+      <p>
+        El Método LAYNA, desde la comprensión del ser humano como un sistema
+        energético e informacional, no pretende sustituir el conocimiento médico
+        convencional, sino ampliar los conocimientos para poder obtener mayores
+        resultados.
+      </p>
+      <p>
+        En la actualidad existen cuadros clínicos complejos —como la
+        fibromialgia, la sensibilidad química múltiple, la electrosensibilidad,
+        la fatiga crónica, la enfermedad de Lyme crónica o algunos síndromes
+        persistentes tras infecciones virales— que, en determinados casos,
+        pueden resultar difíciles de abordar desde un enfoque exclusivamente
+        convencional.
+      </p>
+      <p>
+        Ampliar la mirada hacia una comprensión más global del ser humano abre
+        nuevas posibilidades de acompañamiento orientadas a favorecer la
+        recuperación del equilibrio, el bienestar y la autonomía de la persona.
+      </p>
+      <p>
+        El Método LAYNA propone realizar este acompañamiento desde un enfoque
+        integrativo, respetuoso con la fisiología conocida y orientado a
+        facilitar la recuperación progresiva de la coherencia interna del
+        sistema.
+      </p>
+
+      <div class="synthesis-box mt-medium">
+        <p><strong>MÓDULO 2</strong></p>
+        <p>La vida es energía en movimiento.</p>
+        <p>
+          El ser humano es, en esencia, un sistema vibrante y coherente. Un
+          cuerpo que vibra en coherencia es un cuerpo que tiende naturalmente a
+          la salud.
+        </p>
+      </div>
+    </div>
+
+    <!-- MÓDULO 3 -->
+    <div class="page" id="modulo3">
+      <div class="module-label">Módulo 3</div>
+      <h2>Herramientas terapéuticas del Método LAYNA</h2>
+
+      <h3>3.1. Evaluación funcional del estado energético</h3>
+      <p>
+        Dentro del Método LAYNA se propone iniciar el proceso de acompañamiento
+        con una evaluación tanto clínica —a través de la escucha y observación
+        del paciente— como funcional del estado energético mediante el uso de
+        tecnologías de biofeedback, como el sistema BioWell.
+      </p>
+      <p>
+        BioWell analiza la respuesta energética del organismo a través de tres
+        dimensiones fundamentales:<br />
+        • energía<br />
+        • estrés<br />
+        • equilibrio
+      </p>
+      <p>
+        Es importante señalar que BioWell no fotografía el aura en un sentido
+        místico ni mide el calor corporal. El dispositivo evalúa la capacidad
+        del organismo para emitir electrones bajo condiciones controladas, lo
+        que se relaciona con la respuesta del sistema nervioso autónomo y el
+        estado funcional general.
+      </p>
+      <p>
+        Desde la perspectiva del Método LAYNA, esta herramienta permite obtener
+        una referencia inicial y realizar un seguimiento evolutivo del paciente
+        a lo largo del proceso terapéutico.
+      </p>
+      <p>
+        Tecnologías de este tipo han sido utilizadas en contextos de
+        investigación y seguimiento de intervenciones mente-cuerpo por distintos
+        investigadores y divulgadores, como Joe Dispenza.
+      </p>
+
+      <h3>3.2. Herramientas terapéuticas del Método LAYNA</h3>
+      <p>
+        El Método LAYNA integra un conjunto de herramientas terapéuticas
+        orientadas a facilitar la recuperación progresiva de la coherencia del
+        sistema humano.
+      </p>
+      <p>Estas intervenciones se organizan en dos grandes grupos:</p>
+      <p>
+        • Intervenciones sin aparatología<br />
+        • Intervenciones apoyadas en tecnología frecuencial
+      </p>
+      <p>
+        La selección y combinación de estas herramientas se realiza de forma
+        individualizada según la valoración del terapeuta y las necesidades del
+        paciente.
+      </p>
+
+      <h3>Intervenciones sin aparatología</h3>
+      <p>
+        Las intervenciones sin aparatología incluidas en el Método LAYNA
+        presentan efectos beneficiosos que han sido observados y apoyados por la
+        neurociencia.
+      </p>
+      <p>
+        Diversos estudios han observado que prácticas como la meditación, la
+        respiración consciente, la visualización o la inducción de estados de
+        calma pueden favorecer cambios en la respuesta neurofisiológica del
+        organismo asociados a:
+      </p>
+      <p>
+        • Disminución de marcadores de estrés como el cortisol, la adrenalina y
+        la noradrenalina,<br />
+        • Aumento de neurotransmisores y neuromoduladores vinculados al
+        bienestar (dopamina, serotonina, oxitocina y endorfinas),<br />
+        • Mejora de la regulación del sistema nervioso autónomo.
+      </p>
+      <p>
+        Estos cambios demuestran la capacidad de neuroplasticidad del ser
+        humano.
+      </p>
+      <p>
+        Muchas patologías actuales (como fibromialgia, fatiga crónica, síndrome
+        post-COVID, sensibilidad química múltiple, entre otras) hacen que el
+        cerebro quede atrapado en un estado de amenaza persistente, generando
+        estrés crónico y una hipersensibilización del sistema nervioso.
+      </p>
+      <p>
+        De esta situación pueden derivarse múltiples síntomas físicos que hoy en
+        día se engloban frecuentemente bajo el concepto de sensibilidad central:
+        sensibilidad a la luz, al frío, al calor, a los perfumes, a las ondas
+        electromagnéticas, entre otros.
+      </p>
+      <p>
+        Este patrón se asocia a una hiperactivación del sistema límbico.
+        Mediante los trabajos propuestos en el Método LAYNA se busca favorecer
+        la regulación de este sistema para que pueda salir del modo
+        supervivencia-amenaza y recuperar patrones de funcionamiento más
+        equilibrados.
+      </p>
+      <p>
+        Cuando estos cambios se consolidan, la bioquímica interna del organismo
+        tiende a desplazarse hacia estados más regulados, lo que puede favorecer
+        los procesos naturales de autorregulación y recuperación funcional.
+      </p>
+    </div>
+
+    <!-- MÓDULO 3 (continuación) -->
+    <div class="page">
+      <h3>Reprogramación del subconsciente</h3>
+      <p>
+        Dentro del Método LAYNA ocupa un lugar central el trabajo de
+        identificación y transformación de programas limitantes mediante
+        metodologías de reprogramación del subconsciente.
+      </p>
+      <p>
+        Muchas de las situaciones que vivimos —tanto físicas como emocionales,
+        relacionales o profesionales— pueden estar asociadas a programas
+        subconscientes limitantes y a emociones que se han vinculado a dichos
+        programas.
+      </p>
+      <p>
+        En ocasiones, la dificultad para sanar o avanzar en distintas áreas de
+        la vida puede estar relacionada con patrones aprendidos en etapas
+        previas (infancia, adolescencia u otros momentos significativos).
+      </p>
+      <p>
+        Lo que propone esta reprogramación es identificar el programa limitante
+        asociado al síntoma o situación que se desea transformar —ya sea físico,
+        emocional o vital— y sustituirlo por un programa capacitante y
+        expansivo.
+      </p>
+      <p>
+        Cuando estos programas se modifican, se libera el patrón que impedía el
+        avance o que contribuía al desequilibrio, facilitando así procesos de
+        reorganización y mejora del bienestar.
+      </p>
+
+      <h3>Meditación guiada</h3>
+      <p>
+        Es un proceso mediante el cual el paciente puede cambiar su estado
+        mental, emocional y fisiológico, llevando al organismo a un estado de
+        coherencia.
+      </p>
+      <p>
+        Cuando la meditación guiada se practica de forma sostenida en el tiempo,
+        los cambios pueden ser muy significativos.
+      </p>
+
+      <h3>Práctica del silencio</h3>
+      <p>
+        Es un proceso intencional mediante el cual el paciente reduce la
+        estimulación externa con el fin de favorecer la regulación del sistema
+        nervioso y la atención interna.
+      </p>
+      <p>
+        El silencio regula profundamente al ser. Actúa por acumulación y
+        constancia, no por intensidad puntual. Aunque en un inicio pueda
+        resultar incómodo, forma parte natural del proceso y no debe
+        interpretarse como un fallo.
+      </p>
+      <p>
+        Con la práctica sostenida en el tiempo, la persona puede permanecer cada
+        vez más tiempo en estados de quietud, lo que se asocia con:
+      </p>
+      <p>
+        • reducción del estrés,<br />
+        • mejora de la regulación emocional,<br />
+        • modificación de patrones cerebrales,<br />
+        • y aumento de la atención sostenida.
+      </p>
+      <p>
+        Se trata de una herramienta de gran valor que favorece el
+        autoconocimiento y la percepción interna.
+      </p>
+
+      <h3>Respiración consciente</h3>
+      <p>
+        Es un proceso consciente en el que el paciente permanece activo, ya que
+        debe mantener presencia en su respiración.
+      </p>
+      <p>
+        Al realizar este acto consciente de llevar presencia e intención a la
+        respiración, se obtienen múltiples beneficios, incluida la mejora de la
+        oxigenación celular cuando se realiza desde una respiración ampliada.
+      </p>
+    </div>
+
+    <!-- MÓDULO 3 (continuación) -->
+    <div class="page">
+      <h3>Visualización</h3>
+      <p>
+        Parte de la premisa de que el cerebro responde de forma similar ante
+        experiencias intensamente imaginadas y vividas emocionalmente que ante
+        experiencias reales.
+      </p>
+      <p>
+        Es una técnica especialmente útil en personas con alta capacidad de
+        implicación emocional en la experiencia imaginada.
+      </p>
+      <p>
+        Cuando se practica de forma adecuada, pueden observarse cambios
+        significativos al sostener estados internos coherentes con la nueva
+        referencia que la persona está integrando.
+      </p>
+      <p>
+        Restaura el sistema límbico y nos permite salir del estado
+        supervivencial al estado de creación.
+      </p>
+
+      <h3>Conexión a tierra (grounding)</h3>
+      <p>
+        Es una práctica de contacto directo con la tierra, habitualmente
+        realizada descalzo.
+      </p>
+      <p>
+        Puede favorecer estados de relajación, apoyar la regulación del sistema
+        nervioso y contribuir al equilibrio fisiológico al facilitar la
+        igualación con el potencial eléctrico del suelo.
+      </p>
+      <p>
+        De la misma manera, es importante el contacto directo con el sol,
+        especialmente en horas de baja intensidad que permitan la exposición
+        segura. El sol constituye una fuente de energía relevante para el
+        funcionamiento del organismo.
+      </p>
+
+      <h3>Síntesis de las intervenciones sin aparatología</h3>
+      <p>
+        Cuando eliges respirar con conciencia o cultivar emociones coherentes a
+        través de la observación, la meditación o el silencio, no solo te
+        relajas: estás ordenando tu campo.
+      </p>
+      <p>
+        Al ordenar tu campo se afina la luz que transmites y la vibración que
+        emites, permitiendo al organismo volver progresivamente a su coherencia
+        y orden original.
+      </p>
+      <p>
+        Es en este estado de coherencia donde el cuerpo tiende a autorregularse
+        y a favorecer sus procesos naturales de recuperación.
+      </p>
+
+      <h3>B. Intervenciones apoyadas en tecnología frecuencial</h3>
+
+      <h4>Dispositivos de tecnología frecuencial</h4>
+      <p>
+        El Método LAYNA incorpora dispositivos basados en emisión de frecuencias
+        con el objetivo de facilitar estados de reorganización energética y
+        vibracional, recuperando la coherencia original del sistema.
+      </p>
+
+      <h4>Oscilador de ondas múltiples</h4>
+      <p>
+        El oscilador de ondas múltiples es un dispositivo de estimulación
+        frecuencial que incorpora un amplio rango de frecuencias que se
+        encuentran dentro de nuestros órganos y sistemas.
+      </p>
+      <p>
+        Durante la sesión, los emisores se colocan a ambos lados del cuerpo del
+        paciente, permitiendo la exposición controlada del organismo a estos
+        patrones frecuenciales.
+      </p>
+      <p>
+        Cuando un órgano o sistema ha visto alterado su ritmo funcional o ha
+        perdido su coherencia, la exposición a señales compatibles con su
+        frecuencia original hace que el organismo entre en resonancia con dichos
+        patrones de coherencia y vuelva a su estado de equilibrio.
+      </p>
+      <p>
+        Su función es facilitar mediante resonancia la recuperación progresiva
+        de patrones vibracionales más eficientes, permitiendo que los mecanismos
+        naturales de autorregulación del organismo puedan activarse.
+      </p>
+      <p>
+        Esto se debe a que cuando el órgano o sistema vuelve a su estado de
+        coherencia original, el propio organismo tiende a autorregularse.
+      </p>
+      <p>
+        La selección de programas y tiempos de exposición se realiza de forma
+        individualizada según la valoración del terapeuta.
+      </p>
+    </div>
+
+    <!-- MÓDULO 3 (continuación) -->
+    <div class="page">
+      <h4>Lámpara Rife Panotron 60</h4>
+      <p>
+        La lámpara Rife Panotron 60 es un aplicador de plasma que emite campos
+        electromagnéticos de alta frecuencia a través de un tubo de gas
+        ionizado, con el objetivo de potenciar la regulación energética del
+        organismo.
+      </p>
+      <p>Su funcionamiento puede resumirse en cuatro etapas:</p>
+      <p>
+        1. El generador envía una señal de alta frecuencia.<br />
+        2. El gas contenido en el tubo se ioniza formando plasma.<br />
+        3. El tubo emite un campo electromagnético oscilante.<br />
+        4. Este campo se propaga en el entorno.
+      </p>
+      <p>
+        Dentro del Método LAYNA, esta lámpara se recomienda habitualmente en
+        combinación con el oscilador de ondas múltiples, con el fin de potenciar
+        los efectos del trabajo frecuencial.
+      </p>
+
+      <h4>Estimulación biofotónica mediante luz</h4>
+      <p>
+        El Método LAYNA incorpora tecnologías de estimulación lumínica de baja
+        intensidad, aplicadas habitualmente mediante dispositivos tipo gafas
+        biofotónicas.
+      </p>
+      <p>
+        Estas herramientas emiten patrones de luz específicos que pueden influir
+        en la regulación neurovegetativa.
+      </p>
+      <p>
+        El físico alemán Fritz-Albert Popp, pionero en la investigación de los
+        biofotones, describió que las células vivas emiten luz ultradébil y que
+        la coherencia de esta emisión se relaciona con el estado funcional del
+        organismo.
+      </p>
+      <p>
+        Según sus investigaciones, los sistemas biológicos sanos tienden a
+        emitir luz de forma altamente coherente, mientras que en estados de
+        desregulación esta emisión se vuelve más caótica o incoherente.
+      </p>
+      <p>
+        Según distintos estudios, este tipo de estimulación se ha asociado con:
+      </p>
+      <p>
+        • aumento de la activación parasimpática (vagotonía),<br />
+        • mejora de la coherencia del ritmo cardíaco,<br />
+        • y mayor capacidad de regulación fisiológica.
+      </p>
+      <p>
+        Existen diferentes programas de estimulación que se seleccionan en
+        función del perfil del paciente.
+      </p>
+
+      <h3>Síntesis final del módulo</h3>
+      <p>
+        Las intervenciones terapéuticas presentadas —tanto sin aparatología como
+        apoyadas en tecnología— son las seleccionadas por la creadora del Método
+        LAYNA por considerarlas especialmente útiles dentro de un acompañamiento
+        global basado en la comprensión del ser humano como un sistema
+        energético, vibracional, fotónico e informacional.
+      </p>
+      <p>
+        Existen, por supuesto, muchas otras herramientas terapéuticas igualmente
+        válidas. No obstante, desde la experiencia práctica acumulada en el
+        desarrollo del método, estas son las que han mostrado mayor coherencia y
+        aplicabilidad dentro del modelo LAYNA.
+      </p>
+
+      <div class="synthesis-box mt-medium">
+        <p>
+          ¡El propósito profundo de este trabajo no es añadir nada al ser
+          humano, sino facilitar que recuerde el orden que ya habita en él, que
+          recuerde su biología divina!
+        </p>
+        <p>
+          ¡Cuando el sistema recupera su coherencia original, la biología se
+          reorganiza, la mente se aquieta y la vida comienza a fluir de forma
+          natural, regresando a su lugar de origen!
+        </p>
+        <p>
+          ¡Es, en esencia, un proceso de recordar quiénes somos realmente… y de
+          reconocer que habitamos en un campo de orden inteligente que contiene
+          el todo, del cual formamos parte inseparable!
+        </p>
+        <p>
+          ¡No somos seres aislados, sino expresiones de una misma unidad viva; y
+          es precisamente en esa coherencia profunda donde el organismo se
+          regula, la conciencia se expande y la vida comienza a vivirse con
+          mayor presencia, plenitud y sentido!
+        </p>
+        <p>
+          ¡Cuando el ser humano se recuerda a sí mismo, no solo se ordena su
+          biología y se apoya la recuperación de su salud… también se abre la
+          puerta a una forma de vivir más consciente, más expansiva y, en
+          definitiva, más feliz!
+        </p>
+      </div>
+    </div>
+
+    <!-- GALERÍA DE IMÁGENES -->
+    <div class="page" id="galeria">
+      <div class="module-label">Anexo visual</div>
+      <h2>Galería de imágenes y dispositivos</h2>
+      <p class="section-subtitle">
+        Algunas de las imágenes que acompañan al Método LAYNA, sus dispositivos
+        y representaciones simbólicas del campo energético y la coherencia.
+      </p>
+
+      <div class="gallery">
+        <!-- Ajusta los nombres de archivo según los que tengas en /public -->
+        <div class="gallery-item">
+          <img src="/image0.jpeg" alt="Imagen 1" />
+          <div class="gallery-caption">
+            Dispositivo y entorno frecuencial asociado a los procesos de
+            reorganización energética.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="/image1.jpeg" alt="Imagen 2" />
+          <div class="gallery-caption">
+            Representación visual de mediciones o gráficos utilizados como apoyo
+            a la comprensión del proceso.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="/image2.jpeg" alt="Imagen 3" />
+          <div class="gallery-caption">
+            Imagen simbólica del campo energético humano en interacción con su
+            entorno.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="/image3.jpeg" alt="Imagen 4" />
+          <div class="gallery-caption">
+            Ilustración de sistemas de medición o informes de coherencia
+            utilizados en el Método LAYNA.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="/image4.jpeg" alt="Imagen 5" />
+          <div class="gallery-caption">
+            Espacio de consulta preparado para facilitar estados de calma y
+            regulación profunda.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="/image5.png" alt="Imagen 6" />
+          <div class="gallery-caption">
+            Metáfora visual del ser humano en conexión con la tierra y el cielo.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="/image6.png" alt="Imagen 7" />
+          <div class="gallery-caption">
+            Representación de la expansión del campo de luz asociada a estados
+            de mayor coherencia interna.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="/image7.png" alt="Imagen 8" />
+          <div class="gallery-caption">
+            Esquema simbólico de campo energético ordenado alrededor del cuerpo.
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="/image8.png" alt="Imagen 9" />
+          <div class="gallery-caption">
+            Imagen de chakras alineados y conexión con planos de consciencia más
+            sutiles.
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-large center" style="font-size: 9pt; color: #7a8b90">
+        Las imágenes son de carácter ilustrativo y acompañan la comprensión del
+        Método LAYNA desde una perspectiva simbólica y experiencial.
+      </p>
+    </div>
+  </body>
+</html>
